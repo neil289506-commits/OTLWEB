@@ -1,0 +1,22 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Build 產物
+dist/
+.wrangler/
+
+# 環境變數 / 敏感檔案
+.env
+.env.local
+*.pem
+!worker/src/rsaKey.ts
+
+# 編輯器
+.vscode/
+.idea/
+*.swp
+
+# 系統
+.DS_Store
+Thumbs.db

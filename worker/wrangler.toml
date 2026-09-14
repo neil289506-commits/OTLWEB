@@ -1,0 +1,21 @@
+name = "otl-hono-api"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# ----------------------------------------------------------------------------
+# KV Namespace（已存在的話，直接把你原本的 id 貼在這裡）
+# 若尚未建立： wrangler kv:namespace create "OTL_STORE"
+# ----------------------------------------------------------------------------
+kv_namespaces = [
+  { binding = "OTL_STORE", id = "227e50fdeb9f408f99364c5c57a2d8c9" }
+]
+
+# ----------------------------------------------------------------------------
+# 選用：覆蓋內建的 RSA 公鑰（PEM 格式，X.509 SubjectPublicKeyInfo）
+# 若不設定，會使用 src/rsaKey.ts 內建的預設公鑰。
+# 設定方式（不要把公鑰寫在這個檔案裡，用 secret 更安全）：
+#   wrangler secret put RSA_PUBLIC_KEY_PEM
+# ----------------------------------------------------------------------------
+# [vars]
+# RSA_PUBLIC_KEY_PEM = "-----BEGIN PUBLIC KEY-----\n...\n-----END PUBLIC KEY-----"

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OTL 一次性連結產生器</title>
+  <meta name="description" content="產生安全的一次性連結，RSA-4096 加密，Cloudflare 全球分散式儲存" />
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="brand-header">
+        <span class="dot"></span>OTL 一次性連結產生器
+      </div>
+
+      <div class="status-line">
+        <span id="status-dot" class="status-dot"></span>
+        <span id="status-text">檢查後端狀態中...</span>
+      </div>
+
+      <h1>產生安全的一次性連結</h1>
+      <p class="desc">
+        輸入目標網址，系統會以 RSA-4096 加密令牌並透過 Cloudflare
+        全球網路儲存。連結僅能被開啟並確認一次，之後即自動失效。
+      </p>
+
+      <form id="create-form" class="form">
+        <label class="field-label" for="target-url">目標網址</label>
+        <input
+          id="target-url"
+          type="url"
+          class="text-input"
+          placeholder="https://example.com/your-secret-page"
+          required
+          autocomplete="off"
+        />
+
+        <label class="field-label" for="expiration">有效期限</label>
+        <select id="expiration" class="select-input"></select>
+
+        <div id="error-box" class="error-box" style="display: none"></div>
+
+        <button id="submit-btn" type="submit" class="btn btn-primary">
+          <span class="spinner"></span>
+          <span class="btn-label">產生一次性連結</span>
+        </button>
+      </form>
+
+      <div id="result-box" class="result-box" style="display: none">
+        <div class="icon-circle success">✓</div>
+        <h2>連結已產生！</h2>
+        <p class="desc">此連結有效期限為 <strong id="result-expiry-label"></strong>，請盡快分享給收件人。</p>
+
+        <label class="field-label">一次性連結</label>
+        <div class="copy-row">
+          <input id="result-link" class="text-input" readonly />
+          <button id="copy-btn" class="btn-copy" type="button">複製</button>
+        </div>
+
+        <details class="tech-details">
+          <summary>技術細節（RSA-4096 加密令牌）</summary>
+          <div class="url-box">
+            <span class="label">加密令牌（Base64，節錄）</span>
+            <code id="encrypted-token-preview"></code>
+          </div>
+        </details>
+
+        <button id="create-another-btn" class="btn btn-secondary" type="button">
+          產生另一個連結
+        </button>
+      </div>
+
+      <div class="footer-note">
+        後端由 Cloudflare Workers + KV 提供 · 原始碼採 MIT 授權
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.ts"></script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+:root {
+  color-scheme: light;
+  --brand: #4338ca;
+  --brand-dark: #3730a3;
+  --brand-light: #e0e7ff;
+  --success: #15803d;
+  --success-light: #dcfce7;
+  --danger: #b91c1c;
+  --danger-light: #fee2e2;
+  --text: #111827;
+  --text-muted: #4b5563;
+  --border: #d1d5db;
+  --bg: #f3f4f6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "PingFang TC", "Microsoft JhengHei", sans-serif;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background: #eef0f7;
+  background-image: linear-gradient(135deg, #eef0fb 0%, #e0e7ff 100%);
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 20px 25px -5px rgba(17, 24, 39, 0.1),
+    0 8px 10px -6px rgba(17, 24, 39, 0.06);
+  padding: 40px 32px;
+  text-align: center;
+  animation: fadeIn 0.35s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--brand);
+  letter-spacing: 0.03em;
+}
+
+.brand-header .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+.status-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d1d5db;
+  transition: background 0.2s ease;
+}
+
+.status-dot.online {
+  background: var(--success);
+  box-shadow: 0 0 0 3px var(--success-light);
+}
+
+.status-dot.offline {
+  background: var(--danger);
+  box-shadow: 0 0 0 3px var(--danger-light);
+}
+
+h1 {
+  font-size: 21px;
+  font-weight: 800;
+  margin: 0 0 10px;
+  color: var(--text);
+}
+
+h2 {
+  font-size: 19px;
+  font-weight: 800;
+  margin: 4px 0 8px;
+  color: var(--text);
+}
+
+p.desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0 0 24px;
+  font-weight: 500;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.field-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.text-input,
+.select-input {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  font-size: 14px;
+  color: var(--text);
+  background: #ffffff;
+  margin-bottom: 18px;
+  font-family: inherit;
+  transition: border-color 0.15s ease;
+}
+
+.text-input:focus,
+.select-input:focus {
+  outline: none;
+  border-color: var(--brand);
+}
+
+.select-input {
+  cursor: pointer;
+}
+
+.error-box {
+  background: var(--danger-light);
+  color: var(--danger);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(67, 56, 202, 0.3);
+}
+
+.btn-primary:hover {
+  background: var(--brand-dark);
+}
+
+.btn-primary:disabled {
+  background: #a5a6d6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  margin-top: 10px;
+}
+
+.btn-secondary:hover {
+  background: var(--bg);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn.loading .spinner {
+  display: inline-block;
+}
+
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 28px;
+}
+
+.icon-circle.success {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.result-box {
+  text-align: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.copy-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.copy-row .text-input {
+  margin-bottom: 0;
+  font-family: "SF Mono", "Courier New", monospace;
+  font-size: 12.5px;
+}
+
+.btn-copy {
+  flex-shrink: 0;
+  padding: 0 18px;
+  border-radius: 12px;
+  border: none;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-copy:hover {
+  background: var(--brand-dark);
+}
+
+.btn-copy.copied {
+  background: var(--success);
+}
+
+.tech-details {
+  margin: 18px 0;
+  text-align: left;
+}
+
+.tech-details summary {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.url-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 12px;
+  color: var(--text);
+  word-break: break-all;
+  margin-top: 10px;
+  text-align: left;
+  font-family: "SF Mono", "Courier New", monospace;
+  font-weight: 600;
+}
+
+.url-box .label {
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.footer-note {
+  margin-top: 24px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}

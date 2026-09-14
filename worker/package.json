@@ -1,0 +1,22 @@
+{
+  "name": "otl-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "OTL (One-Time Link) - Cloudflare Worker 後端，含 RSA-4096 加密展示與確認跳轉頁",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "hono": "^4.6.0",
+    "chanfana": "^2.6.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0",
+    "@cloudflare/workers-types": "^4.20241004.0",
+    "typescript": "^5.6.0"
+  }
+}

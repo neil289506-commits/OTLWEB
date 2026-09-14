@@ -1,0 +1,56 @@
+name: Deploy Worker to Cloudflare
+
+# 觸發時機：
+#   1. push 到 main 分支且 worker/ 目錄有變更時自動觸發
+#   2. 也可以在 GitHub Actions 頁面手動觸發（workflow_dispatch）
+#
+# 使用前必讀（重要）：
+#   這個 workflow 需要兩個 GitHub Secrets 才能運作：
+#     - CLOUDFLARE_API_TOKEN   你的 Cloudflare API Token
+#     - CLOUDFLARE_ACCOUNT_ID  你的 Cloudflare Account ID
+#
+#   設定位置：GitHub repo → Settings → Secrets and variables → Actions
+#             → New repository secret
+#
+#   取得 API Token：https://dash.cloudflare.com/profile/api-tokens
+#     建議使用「Edit Cloudflare Workers」範本建立 Token
+#
+#   取得 Account ID：Cloudflare Dashboard 右側欄位可看到，
+#     或執行 `wrangler whoami` 也會顯示
+on:
+  push:
+    branches: [main]
+    paths:
+      - "worker/**"
+      - ".github/workflows/deploy-worker.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取原始碼
+        uses: actions/checkout@v4
+
+      - name: 設定 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: worker/package-lock.json
+
+      - name: 安裝依賴
+        working-directory: worker
+        run: npm ci
+
+      - name: TypeScript 型別檢查
+        working-directory: worker
+        run: npm run typecheck
+
+      - name: 部署到 Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: worker
+          command: deploy
